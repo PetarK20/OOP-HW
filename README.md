@@ -140,22 +140,52 @@ Returned: Yes
 
 ## Класове
 
-Клас Author Представлява автор на книга.
+Клас **Author** Представлява автор на книга.
 
 __Членове__:
 `std::string name`
 `int birthYear`
 
-### Клас _`Author`_
+---
 
-### Клас _`Book`_
+Клас **Book** Представлява книга с основни характеристики, като агрегира обекта `Author`.
 
-### Клас _`Library`_
+__Членове__:
+`std::string title`
+`Author author`
+`int year`
+`double price`
+`std::string isbn`
+`static int totalBooks` (Брояч на всички създадени обекти Book)
 
-### Клас _`Loan`_
+---
 
-### Клас _`Member`_
+Клас **Member** Представлява регистриран член на библиотеката.
 
+__Членове__:
+`std::string name`
+`std::string memberID`
+`int yearJoined`
+
+---
+
+Клас **Loan** Представлява запис за зает ресурс, свързващ книга (по ISBN) и член (по ID).
+
+__Членове__:
+`std::string isbn`
+`std::string memberID`
+`std::string startDate`
+`std::string dueDate`
+`bool returned`
+
+---
+
+Клас **Library** Управлява цялата библиотечна система, съхранявайки и обработвайки колекциите от книги, членове и заеми.
+
+__Членове__:
+`std::vector<Book> books`
+`std::vector<Member> members`
+`std::vector<Loan> loans`
 
 
 ## Част от екранна снимка
