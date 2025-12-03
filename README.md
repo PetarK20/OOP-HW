@@ -167,7 +167,7 @@ Returned: Yes
     * `static int totalBooks`: **Брояч** на всички създадени обекти `Book`.
 * **Специални Методи (Rule of Five):**
     * `Book(const Book&)`: **Копиращ конструктор**.
-    * `Book(Book&&) noexcept`: **Конструктор за преместване** (Move Semantics).
+    * `Book(Book&&) noexcept`: **Преместващ конструктор** .
     * `operator=(const Book&)`: **Оператор за копиращо присвояване**.
     * `operator=(Book&&) noexcept`: **Оператор за преместващо присвояване**.
     * `~Book()`: **Деструктор**, който намалява `totalBooks`.
