@@ -140,6 +140,12 @@ Returned: Yes
 
 ## Класове
 
+Клас Author Представлява автор на книга.
+
+__Членове__:
+`std::string name`
+`int birthYear`
+
 ### Клас _`Author`_
 
 ### Клас _`Book`_
