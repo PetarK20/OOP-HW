@@ -14,7 +14,7 @@ g++ -std=c++17 -Wall -Wextra -O2 -Iinclude main/Test.cpp src/*.cpp -o library_ap
 ```bash
 ./library_app
 ```
----
+
 
 ## Примерен изход
 ```bash
