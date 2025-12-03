@@ -14,7 +14,26 @@ g++ -std=c++17 -Wall -Wextra -O2 -Iinclude main/Test.cpp src/*.cpp -o library_ap
 ```bash
 ./library_app
 ```
+## Структура на проекта
 
+```text
+OOP-HW/
+├── include/ 
+│ ├── Author.h
+│ ├── Book.h
+│ ├── Library.h
+│ ├── Loan.h
+│ └── Member.h
+├── src/ 
+│ ├── Author.cpp
+│ ├── Book.cpp
+│ ├── Library.cpp
+│ ├── Loan.cpp
+│ └── Member.cpp
+├── main/ 
+│ └── Test.cpp 
+└── README.md 
+```
 
 ## Примерен изход
 ```bash
