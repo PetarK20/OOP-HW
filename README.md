@@ -176,7 +176,7 @@ Returned: Yes
     * `setYear(int y)`: Задава година на издаване с **валидация** (1000-2025), използвайки `std::out_of_range`.
     * `static getTotalBooks()`: Връща общия брой създадени книги.
     * `to_string() const`: Връща форматиран низ с информация за книгата.
-    * **Getters/Setters** за всички член-данни.
+    * **Getters/Setters** за член-данни.
 
 ***
 
