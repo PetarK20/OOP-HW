@@ -146,10 +146,11 @@ Returned: Yes
 * **Член-данни (Private):**
     * `std::string name`
     * `int birthYear`
-* **Конструктор:**
-    * `Author(std::string name, int year)`
+* **Конструктори:**
+    * `Author()`
+    * `Author(std::string authorName, int year)`
 * **Методи (Public):**
-    * `setBirthYear(int year)`: Задава година на раждане с **валидация** (изключение, ако годината е извън обхват 1850-2025).
+    * `setBirthYear(int year)`: Задава година на раждане с **валидация** (трябва да е между 1850 и 2025 г.), използвайки `std::out_of_range`.
     * `to_string() const`: Връща форматиран низ с информация за автора.
     * **Getters:** `getName() const`, `getBirthYear() const`.
 
@@ -169,9 +170,10 @@ Returned: Yes
     * `Book(Book&&) noexcept`: **Конструктор за преместване** (Move Semantics).
     * `operator=(const Book&)`: **Оператор за копиращо присвояване**.
     * `operator=(Book&&) noexcept`: **Оператор за преместващо присвояване**.
+    * `~Book()`: **Деструктор**, който намалява `totalBooks`.
 * **Методи (Public):**
-    * `setPrice(double p)`: Задава цена с **валидация** (не може да бъде отрицателна).
-    * `setYear(int y)`: Задава година на издаване с **валидация** (1000-2025).
+    * `setPrice(double p)`: Задава цена с **валидация** (не може да бъде отрицателна), използвайки `std::invalid_argument`.
+    * `setYear(int y)`: Задава година на издаване с **валидация** (1000-2025), използвайки `std::out_of_range`.
     * `static getTotalBooks()`: Връща общия брой създадени книги.
     * `to_string() const`: Връща форматиран низ с информация за книгата.
     * **Getters/Setters** за всички член-данни.
@@ -184,11 +186,12 @@ Returned: Yes
 * **Член-данни (Private):**
     * `std::string name`, `std::string memberID`
     * `int yearJoined`
-* **Конструктор:**
+* **Конструктори:**
+    * `Member()`
     * `Member(std::string name, std::string id, int year)`
 * **Методи (Public):**
-    * `setMemberID(const std::string& id)`: Задава ID с **валидация** (не може да е празен низ).
-    * `setYearJoined(int year)`: Задава година на присъединяване с **валидация** (1900-2025).
+    * `setMemberID(const std::string& id)`: Задава ID с **валидация** (не може да е празен низ), използвайки `std::invalid_argument`.
+    * `setYearJoined(int year)`: Задава година на присъединяване с **валидация** (1900-2025), използвайки `std::out_of_range`.
     * `to_string() const`: Връща форматиран низ с информация за члена.
     * **Getters:** `getName() const`, `getMemberID() const`, `getYearJoined() const`.
 
@@ -201,13 +204,14 @@ Returned: Yes
     * `std::string isbn`, `std::string memberID`
     * `std::string startDate`, `std::string dueDate`
     * `bool returned`
-* **Конструктор:**
-    * `Loan(...)`: Конструктор с **валидация** (dueDate не може да е преди startDate).
+* **Конструктори:**
+    * `Loan()`
+    * `Loan(...)`: Конструктор с **валидация** (dueDate не може да е преди startDate), използвайки `std::invalid_argument`.
 * **Методи (Public):**
     * `markReturned(bool status)`: Променя статуса на заема.
     * `isOverdue(const std::string &currentDate) const`: Проверява дали заемът е просрочен спрямо текуща дата и не е върнат.
     * `to_string() const`: Връща форматиран низ с информация за заема.
-    * **Getters** за всички член-данни.
+    * **Getters:** `getIsbn() const`, `getMemberID() const`, `isReturned() const`, и т.н..
 
 ***
 
@@ -219,14 +223,17 @@ Returned: Yes
     * `std::vector<Member> members`
     * `std::vector<Loan> loans`
 * **Методи за Управление (Public):**
-    * `addBook(const Book &book)`, `addMember(const Member &member)`: Добавя обекти, като `addMember` има проверка за **дублиращи се ID-та**.
-    * `loanBook(...)`: Създава нов заем, **ако книгата е налична** (`isBookAvailable` е true).
-    * `returnBook(...)`: Намира активния заем и променя статуса му на `returned = true`.
+    * `addBook(const Book &book)`: Добавя книга в наличност.
+    * `addMember(const Member &member)`: Добавя член, като проверява за **дублиращи се ID-та** чрез `isMemberTaken`.
+    * `loanBook(...)`: Създава нов заем, **само ако книгата е налична** (`isBookAvailable` е true).
+    * `returnBook(...)`: Намира активния заем по ISBN и MemberID и променя статуса му на `returned = true`.
 * **Методи за Търсене/Проверка:**
-    * `isBookAvailable(const std::string &isbn) const`: Проверява наличността (няма активен заем).
+    * `isBookAvailable(const std::string &isbn) const`: Проверява дали книгата е в библиотеката (`hasBook`) и дали няма активен (невърнат) заем за нея.
+    * `hasBook(const std::string &isbn) const`: Проверява дали книгата съществува в колекцията `books`.
+    * `isMemberTaken(const std::string &memberID) const`: Проверява дали член с дадено ID вече съществува.
     * `findBooksByAuthor(...) const`: Връща вектор от книги от даден автор.
     * `getBooksByYear(...) const`: Връща вектор от книги, издадени през дадена година.
-    * `to_string() const`: Връща пълно текстово представяне на състоянието на библиотеката.
+    * `to_string() const`: Връща пълно текстово представяне на състоянието на библиотеката (книги, членове, заеми).
 
 ## Част от екранна снимка
 
